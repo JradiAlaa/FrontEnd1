@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>
+    Gestion Des  Comptes
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table 
+     [settings]="settings"
+     [source]="user"
+     (createConfirm)="oncreateConfirm($event)"
+     (deleteConfirm)="onDeleteConfirm($event)"
+     (editConfirm)="onupdateConfirm($event)" >
+    </ng2-smart-table>
+    
+  </nb-card-body>
+</nb-card>
