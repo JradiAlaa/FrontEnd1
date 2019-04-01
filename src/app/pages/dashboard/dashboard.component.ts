@@ -1,17 +1,32 @@
-import { Component } from '@angular/core';
-import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { Component, OnInit } from '@angular/core';
+//import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { AuthGuard } from '../../@core/data/auth-guard.service';
+import { NbAuthJWTToken } from '../../auth';
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent {
+export class DashboardComponent  implements OnInit  {
+  //constructor(private auth :AuthGuard ) {}
+//  private token: NbAuthJWTToken
+  ngOnInit() {
+  //  localStorage.getItem(this.token.getPayload()['role']);
+  //  console.log("test token dash : " ,this.token.getPayload()['role']) ; 
+
+  //  console.log("test can actibe") ; 
+  //  this.auth.canActivate() ; 
+}
+}
+
+
+
  // user: {};
-  user1 : any
+//  user1 : any
  //  id : null ;
 //  constructor(
  //   private authService: NbAuthService) { }
-  ngOnInit() {
+//  ngOnInit() {
  // this.authService.onTokenChange()
  // .subscribe((token: NbAuthJWTToken) => {
 
@@ -26,6 +41,3 @@ export class DashboardComponent {
  // });
  //this.user1=  localStorage.getItem("idUser") ; 
 // console.log(" dashbored user2 ", this.user1) ; 
-
-}
-}

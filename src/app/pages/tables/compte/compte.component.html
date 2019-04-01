@@ -1,15 +1,30 @@
-<nb-card>
+  <nb-card>
   <nb-card-header>
 Gestion  des Comptes   </nb-card-header>
-
-  <nb-card-body>
-    <ng2-smart-table 
-     [settings]="settings"
-     [source]="user"
-     (createConfirm)="oncreateConfirm($event)"
-     (deleteConfirm)="onDeleteConfirm($event)"
-     (editConfirm)="onupdateConfirm($event)" >
-    </ng2-smart-table>
-    
-  </nb-card-body>
+    <nb-card-body> 
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let u of user">
+            <td>{{u.id }}</td>
+           <td>{{u.email}}</td>
+           <td > 
+              <button class="btn btn-demo btn-success btn-hero" (click)="addUser1(u.id)"> approuver </button>
+          </td>
+          <td > 
+              <button class="btn btn-hero-danger btn-demo" (click)="deleteUser(u.id)"> refuser </button>
+          </td>
+     </tr> 
+        </tbody>
+      </table>
+    </nb-card-body>
+ 
 </nb-card>

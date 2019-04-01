@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { MENU_ITEMS, isDev, firstauth } from './pages-menu';
+import { MENU_ITEMS, firstauth } from './pages-menu';
 import { RoleProvider } from '../@core/data/role-provider.service';
 
 @Component({
@@ -14,9 +14,9 @@ import { RoleProvider } from '../@core/data/role-provider.service';
 })
 export class PagesComponent {
 
- // menu = MENU_ITEMS;
+  //menu = MENU_ITEMS;
  getMenu() {
- //  console.log("++++++++++++++", localStorage.getItem("role"))
+  // console.log("++++++++++++++", localStorage.getItem("role"))
   if ( localStorage.getItem("etat")=="0") return firstauth
   else return MENU_ITEMS
 }

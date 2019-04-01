@@ -10,6 +10,7 @@ import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
+import { GestionuserService } from '../../../@core/data/gestionuser.service';
 
 @Component({
   selector: 'nb-reset-password-page',
@@ -30,7 +31,7 @@ export class NbResetPasswordComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected cd: ChangeDetectorRef,
+              protected cd: ChangeDetectorRef, private userr : GestionuserService ,
               protected router: Router) {
 
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
@@ -45,7 +46,24 @@ export class NbResetPasswordComponent {
     this.service.resetPassword(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
+        var data1 = {
+          "id": localStorage.getItem('idUser'),
+          "password": this.user['password'],
+          "etat": "0"
+        };
+        
+        this.userr.updateUsers(data1).subscribe(
+          res => {
+            console.log(res);
+            localStorage.setItem("etat" , "0") ;
+          },
+          (err) => {
+              console.log("Client-side error occured.");
+            }     
+        )
+      //  return this.router.navigate(['/pages/Confprofil'])
         this.messages = result.getMessages();
+        return this.router.navigate(['/pages/Confprofil'])
       } else {
         this.errors = result.getErrors();
       }

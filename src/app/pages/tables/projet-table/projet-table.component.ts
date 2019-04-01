@@ -16,11 +16,22 @@ import { GestionuserService } from '../../../@core/data/gestionuser.service';
 export class ProjetTableComponent implements OnInit {
   projet: any = []
   user1 : any= []
+  projet1: object = {
+    "id": null,
+    "description": "",
+    "titre": "",
+    "datedeb": "",
+    "datefin": "",
+    "edb": "",
+    "etat": "0", 
+    "idUser":localStorage.getItem("idUser") , 
+  } 
   constructor(private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
   id1 = parseInt( localStorage.getItem("idUser"))
-  
+ 
   ngOnInit() {
-    this.serv.getProjets()
+
+   this.serv.getProjetByIdUser(parseInt(localStorage.getItem("idUser")))
       .subscribe(
         data => {
           this.projet = data
@@ -29,15 +40,31 @@ export class ProjetTableComponent implements OnInit {
           console.log(err)
         }
       )
-      this.userr.getUserById(this.id1)
-      .subscribe(
-        data => {
-          this.user1 = data
+      
+    }
+
+      //--------------------- 
+      newProjet() : void {
+        
+        this.serv.addProjet(this.projet1).subscribe(
+          res => {
+            console.log(res);
+           // this.route.navigate(["pages/profil"])
         },
-        err => {
-          console.log(err)
+          
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
         }
-      )  }
+          )
+        
+         
+        
+      }
+      //--------------------
 
   settings = {
     add: {

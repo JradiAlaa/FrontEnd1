@@ -27,117 +27,30 @@ export class CompteComponent implements OnInit {
         }
       )
   }
-  settings = {
-    add: {
-      confirmCreate: true,
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      confirmSave: true,
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-        show: true,
-      },
-   
-      email: {
-        title: 'email',
-        type: 'string',
-      },
-      password: {
-        title: 'password',
-        type: 'string',
-      },
-      role: {
-        title: 'role',
-        type: 'string',
-      },
-
-    },
-  };
-  oncreateConfirm(event) {
-    console.log('ddddd');
-    if (window.confirm('voulez vous ajouter ce user')) {
-      event.confirm.resolve();
-
-      var data = {
-        "id": null,
-        "email": event.newData.email,
-        "password": event.newData.password,
-        "role": event.newData.role,
-        "etat": "2"
-      };
-
-      this.use.addUsers(data)
-        .subscribe(
-          res => {
-            console.log(res);
-            event.confirm.resolve(event.newData);
-          },
-
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log("Client-side error occured.");
-            } else {
-              console.log("Server-side error occured.");
-            }
-          }
-        )
-    } else {
-      event.confirm.reject();
-    }
-
-  }
-  onupdateConfirm(event) {
-    console.log('ddddd');
+  addUser1(id:number){
     var data = {
-      "id": event.newData.id,
-      "email": event.newData.email,
-      "password": event.newData.password,
-      "role": event.newData.role
+      "id":id ,
+      "etat" : "0" , 
     };
+    this.use.updateUsers(data).subscribe(
+      res => {
+        this.ngOnInit()       
+      },
+      err => {
+        console.log(err)
 
-    this.use.updateUsers(data)
-      .subscribe(
-        res => {
-          console.log(res);
-          event.confirm.resolve(event.newData);
-          this.ngOnInit();
-        },
-
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        }
-      )
+      }
+    )
   }
+  deleteUser(id:number){
+    this.use.suppUsers(id).subscribe(
+      res => {
+        this.ngOnInit()       
+      },
+      err => {
+        console.log(err)
 
-
-  onDeleteConfirm(event) {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-      console.log(event.data);
-      this.use.suppUsers(event.data.id)
-    } else {
-      event.confirm.reject();
-    }
+      }
+    )
   }
-
-
 }
-

@@ -68,7 +68,8 @@ export class NbRegisterComponent {
             
           
         )
-        this.messages = result.getMessages();
+       return this.router.navigate(["/auth/request-password"])
+      //  this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();
       }
@@ -76,7 +77,7 @@ export class NbRegisterComponent {
       const redirect = result.getRedirect();
       if (redirect) {
         setTimeout(() => {
-          return this.router.navigateByUrl(redirect);
+         return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
       this.cd.detectChanges();

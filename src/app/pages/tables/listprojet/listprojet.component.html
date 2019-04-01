@@ -1,0 +1,78 @@
+<nb-card>
+    <nb-card-header>
+  Demende d'ajout projet  </nb-card-header>
+  
+  <nb-card-body *nbIsGranted="['view3', 'admin']"> 
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date Debut</th>
+            <th scope="col">Date Fin</th>
+            <th scope="col">Chaier des charges</th>
+            <th scope="col">Chaier des charges</th>
+            <th scope="col">Etat</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let p of projet">
+            <td>{{p.id }}</td>
+           <td>{{p.titre}}</td>
+           <td>{{p.description}}</td>
+           <td>{{p.datedeb}}</td>
+           <td>{{p.datefin}}</td>
+           <td > 
+              <button class="btn btn-demo btn-success btn-hero" > approuver </button>
+          </td>
+          <td > 
+              <button class="btn btn-hero-danger btn-demo" > refuser </button>
+          </td>
+         
+     </tr> 
+        </tbody>
+      </table>
+    </nb-card-body>
+    <nb-card-body *nbIsGranted="['view', 'client']"> 
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date Debut</th>
+                <th scope="col">Date Fin</th>
+                <th scope="col">Chaier des charges</th>
+                <th scope="col">Chaier des charges</th>
+                <th scope="col">Etat</th>
+
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr *ngFor="let p of projetClient">
+                <td>{{p.id }}</td>
+               <td>{{p.titre}}</td>
+               <td>{{p.description}}</td>
+               <td>{{p.datedeb}}</td>
+               <td>{{p.datefin}}</td>
+               <td > 
+                  <button class="btn btn-demo btn-success btn-hero" > approuver </button>
+              </td>
+              <td > 
+                  <button class="btn btn-hero-danger btn-demo" > refuser </button>
+              </td>
+              <td > 
+                  <button class="btn btn-hero-danger btn-demo" > Au cours  </button>
+              </td>
+         </tr> 
+            </tbody>
+          </table>
+      </nb-card-body>
+
+
+    
+  </nb-card>
+  

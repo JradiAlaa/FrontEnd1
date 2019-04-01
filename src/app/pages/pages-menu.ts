@@ -1,5 +1,27 @@
 import { NbMenuItem } from '@nebular/theme';
 
+function  isAdmin() : boolean {
+  console.log("++++++++++++++11", localStorage.getItem("role")) ;
+ // console.log("testtt token get", token.getPayload['role'])
+ // var tokenPayload = token.getPayload['role'] ;
+ if ( localStorage.getItem("role")=="admin") return false 
+ else return true 
+}
+function  ischef() : boolean {
+  console.log("++++++++++++++11", localStorage.getItem("role"))
+ if ( localStorage.getItem("role")=="chef") return false 
+ else return true 
+}
+function  isclient() : boolean {
+  console.log("++++++++++++++11", localStorage.getItem("role"))
+ if ( localStorage.getItem("role")=="client") return false 
+ else return true 
+}
+function  isdev() : boolean {
+  console.log("++++++++++++++11", localStorage.getItem("role"))
+ if ( localStorage.getItem("role")=="dev") return false 
+ else return true 
+}
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Acceuil',
@@ -8,127 +30,70 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Demende de compte',
-    icon: 'nb-home',
+    title: 'Deposer projet',
+    icon: 'nb-plus-circled',
+    link: '/pages/tables/projet-table',
+    selected : true , 
+    hidden: (isAdmin()&&isclient())
+  },
+  
+   {
+    title: 'Liste de demande projet',
+    icon: 'nb-list',
+    link: '/pages/tables/list-projet-table',
+    hidden: (isAdmin()&&isclient()&&ischef())
+  },
+   {
+    title: 'Mes Projets',
+    icon: 'nb-compose',
+    link: '',
+    hidden: (isdev()&&ischef())
+  },
+   {
+    title: 'Mes taches',
+    icon: 'nb-grid-b-outline',
+    link: '',
+    hidden: (isdev()&&ischef())
+  },
+   {
+    title: 'Suivre projet ',
+    icon: 'nb-loop-circled',
+    link: '',
+    hidden: (isAdmin()&&isclient())
+  },
+   {
+    title: 'Time Tracking ',
+    icon: 'nb-bar-chart',
+    link: '',
+    hidden: (isAdmin()&&isdev()&&ischef())
+  },
+   {
+    title: 'Boite de message',
+    icon: 'nb-email',
+    link: '',
+    
+  },
+   {
+    title: 'Demande de compte client',
+    icon: 'nb-checkmark-circle',
     link: '/pages/tables/compte-table',
+    hidden: isAdmin()
   },
-  {
-    title: 'Déposer projet',
-    icon: 'nb-plus-circled',
+   {
+    title: 'creer compte Dev chef ',
+    icon: 'nb-plus',
     link: '/pages/tables/user-table',
+    hidden: isAdmin()
   },
   {
-    title: 'Mes projets',
-    icon: 'nb-loop-circled',
-    link: '/pages/tables/projet-table',
-  },
-  {
-    title: 'Gérer utulisateur',
+    title: 'Mon Profil',
     icon: 'nb-person',
-    link: '/pages/tables/user-table',
-  },
-  {
-    title: 'Gestionutulisateur',
-    icon: 'nb-person',
-    link: '/pages/Gestionutulisateur',
-    home: true,
-  },
-  {
-    title: 'Messagerie',
-    icon: 'nb-email',
-    link: '/pages/Gestionutulisateur',
-    home: true,
-  },
-  {
-    title: 'Profil',
-    icon: 'nb-email',
     link: '/pages/profil',
-    //home: true,
-  },
-  {
-    title: 'FEATURES',
-    group: true,
-  },
-  {
-    title: 'Auth',
-    icon: 'nb-locked',
-    children: [
-      {
-        title: 'Login',
-        link: '/pages/connexion/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
-];
-export const isDev: NbMenuItem[] = [
-  {
-    title: 'Acceuil',
-    icon: 'nb-home',
-    link: '/pages/dashboard',
-    home: true,
-  },
-
-  {
-    title: 'Déposer projet',
-    icon: 'nb-plus-circled',
-    link: '/pages/tables/user-table',
-  },
-  {
-    title: 'Mes projets',
-    icon: 'nb-loop-circled',
-    link: '/pages/tables/projet-table',
-  },
  
-  {
-    title: 'Messagerie',
-    icon: 'nb-email',
-    link: '/pages/Gestionutulisateur',
-    home: true,
   },
-  {
-    title: 'Profil',
-    icon: 'nb-email',
-    link: '/pages/profil',
-    home: true,
-  },
-  {
-    title: 'FEATURES',
-    group: true,
-  },
-  {
-    title: 'Auth',
-    icon: 'nb-locked',
-    children: [
-      {
-        title: 'Login',
-        link: '/pages/connexion/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+  
+  
+  
 ];
 export const firstauth: NbMenuItem[] = [
   {

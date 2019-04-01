@@ -31,6 +31,7 @@
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
+           
     <ng-container *ngIf="email.invalid && email.touched">
       <p class="error-message" *ngIf="email.errors?.required">
         Email is required!
@@ -55,7 +56,15 @@
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
            [maxlength]="getConfigValue('forms.validation.password.maxLength')"
-           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+           [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+           aria-describedby="passwordHelpInline">
+           <small id="passwordHelpInline" class="text-muted">
+             Pour votre sécurité utulisez un mot de passe contenant : 
+              <li>Entre 8 est 30 caratéres</li>
+              <li>Au moins une lettre majiscule et une lettre miniscule</li>
+              <li>Un Chiffre</li>
+              <li>des caractères spéciaux  parmi : "/-+/@. ils ne doit contenirs le symbole <> </li>
+            </small>
     <ng-container *ngIf="password.invalid && password.touched">
       <p class="error-message" *ngIf="password.errors?.required">
         Password is required!

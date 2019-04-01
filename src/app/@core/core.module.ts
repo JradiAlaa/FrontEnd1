@@ -32,7 +32,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
     console.log('roleeeeee')  ;
 
     // here you could provide any role based on any auth flow
-    return observableOf(['Admin', 'Chef', 'Dev','Client']);
+    return observableOf(['admin', 'chef', 'dev','client']);
   }
 }
 
@@ -82,21 +82,27 @@ export const NB_CORE_PROVIDERS = [
   }).providers,
   NbSecurityModule.forRoot({
     accessControl: {
-      Chef: {
+      chef: {
         view1: '*',
+        view12 : '/pages/404'
       },
-      Client: {
+      client: {
         view: '*',
+        view12 : '/pages/404'
+
       },
-      Dev: {
+      dev: {
         view2:'*',
+        view12 : '/pages/404'
+
       },
-      Admin: {
+      admin: {
      //   parent: 'Chef', 
        view3:'*',
         create: '*',
         edit: '*',
         remove: '*',
+        view12 : '/pages/404'
       },
     },
   }).providers,

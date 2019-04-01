@@ -50,6 +50,7 @@ export class NbLoginComponent {
       this.submitted = false;
 
       if (result.isSuccess()) {
+      //  this.router.navigate(["/pages/dashboard"])
         this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();
@@ -58,7 +59,7 @@ export class NbLoginComponent {
       const redirect = result.getRedirect();
       if (redirect) {
         setTimeout(() => {
-          return this.router.navigateByUrl(redirect);
+        return this.router.navigateByUrl(redirect);
         }, this.redirectDelay);
       }
       this.cd.detectChanges();

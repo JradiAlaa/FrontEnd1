@@ -16,10 +16,11 @@ export class RoleProvider implements NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          console.log('1', token.getPayload()['role'])  ;
+          console.log('ici role provider role ', token.getPayload()['role'])  ;
          localStorage.setItem("role",token.getPayload()['role']);
          localStorage.setItem("etat",token.getPayload()['etat']);
          localStorage.setItem("idUser",token.getPayload()['id']);
+         
           return  token.getPayload()['role']  ;
         }),
       );

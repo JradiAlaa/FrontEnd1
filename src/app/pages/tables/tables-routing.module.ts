@@ -5,6 +5,7 @@ import { TablesComponent } from './tables.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { ProjetTableComponent } from './projet-table/projet-table.component';
 import { CompteComponent } from './compte/compte.component';
+import { ListprojetComponent } from './listprojet/listprojet.component';
 
 const routes: Routes = [{
   path: '',
@@ -20,6 +21,11 @@ const routes: Routes = [{
     {
       path: 'compte-table',
       component:CompteComponent,} ,
+
+      {
+        path: 'list-projet-table',
+        component:ListprojetComponent,} ,
+    
   
 
   

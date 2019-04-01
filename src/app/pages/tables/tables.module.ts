@@ -6,6 +6,7 @@ import { TablesRoutingModule, routedComponents } from './tables-routing.module';
 import { UserTableComponent } from './user-table/user-table.component';
 import { ProjetTableComponent } from './projet-table/projet-table.component';
 import { CompteComponent } from './compte/compte.component';
+import { ListprojetComponent } from './listprojet/listprojet.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { CompteComponent } from './compte/compte.component';
     UserTableComponent,
     ProjetTableComponent,
     CompteComponent,
+    ListprojetComponent,
   ],
 })
 export class TablesModule { }
