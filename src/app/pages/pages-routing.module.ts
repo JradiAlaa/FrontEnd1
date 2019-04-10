@@ -6,6 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GestionutulisateurComponent } from './gestionutulisateur/gestionutulisateur.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ConfprofilComponent } from './confprofil/confprofil.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { DetailPtrojetComponent } from './detail-ptrojet/detail-ptrojet.component';
+import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
 
 const routes: Routes = [{
   path: '',
@@ -14,6 +17,22 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+     
+    },
+    
+    {
+      path: 'ajoutProjet',
+      component: AjoutProjetComponent,
+     
+    },
+    {
+      path: 'calendar',
+      component: CalendarComponent,
+     
+    },
+    {
+      path: 'detailProjet/:id',
+      component: DetailPtrojetComponent,
      
     },
     {

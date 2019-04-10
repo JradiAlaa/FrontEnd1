@@ -15,30 +15,15 @@ Demende d'ajout projet  </nb-card-header>
                 <textarea class="form-control"  [(ngModel)]="projet1.description" rows ="3"> </textarea>
               </div>
           </div>
-        <div class ="row">
-            <div class="form-group col-sm-4">
-                <label>Date début </label>
-                <input type="date"  [(ngModel)]="projet1.datedeb" class="form-control">
-              </div>
-              <div class="form-group col-sm-4">
-                  <label>Date Fin</label>
-                  <input type="date"  [(ngModel)]="projet1.datefin" class="form-control">
-                </div>
-          </div>
-          <div class ="row">
-              <div class="form-group col-sm-4">
-                  <label>Chaier des Charges </label>
-                    <input type="file" class="form-control-file"   [(ngModel)]="projet1.edb" id="exampleFormControlFile1">
-                </div>
-            </div>
+    
             <div class ="row">
-
-            <div class="form-group col-sm-4">
-            
-                    <!-- <label for="exampleFormControlFile1">Example file input</label>
+               
+               
+                    <!-- <label for="exampleFormControlFile1"  [(ngModel)]="projet1.edb">Example file input</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
               
             </div>
+            <div class ="row">
 
             <div class="form-group col-sm-4">
                 <button type="submit"   (click)="newProjet()"class="btn btn-primary">Envoyer</button>

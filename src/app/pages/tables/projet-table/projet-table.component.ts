@@ -13,24 +13,29 @@ import { GestionuserService } from '../../../@core/data/gestionuser.service';
   }
 `],
 })
+
 export class ProjetTableComponent implements OnInit {
   projet: any = []
+  selectedfile : File =null
   user1 : any= []
+  url1 : any 
+   a =(Date.now()).toString() ; 
   projet1: object = {
     "id": null,
     "description": "",
     "titre": "",
-    "datedeb": "",
-    "datefin": "",
-    "edb": "",
-    "etat": "0", 
+    "reference": "PR"+this.a,
+    "etat": "0",
+    "userId": localStorage.getItem("idUser"), 
     "idUser":localStorage.getItem("idUser") , 
   } 
+
   constructor(private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
   id1 = parseInt( localStorage.getItem("idUser"))
- 
-  ngOnInit() {
 
+  
+  ngOnInit() {
+   
    this.serv.getProjetByIdUser(parseInt(localStorage.getItem("idUser")))
       .subscribe(
         data => {
@@ -42,14 +47,32 @@ export class ProjetTableComponent implements OnInit {
       )
       
     }
+ selectedFile: File
 
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+  }
+  
+    onFileSelected(event) {
+      this.selectedfile = <File>event.target.files[0] ; 
+      this.projet['edb'] = this.selectedfile
+    }
+   // Const fd = new FormData() ; 
+  
+   
+ 
       //--------------------- 
       newProjet() : void {
-        
+      //  const uploadData = new FormData();
+      //  uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+     //   this.projet1['edb'] = uploadData ; 
+   //  console.log("test edb 11", this.projet1['edb']);
+
+        console.log("test edb 11", this.projet1);
         this.serv.addProjet(this.projet1).subscribe(
           res => {
             console.log(res);
-           // this.route.navigate(["pages/profil"])
+            this.route.navigate(["pages/tables/list-projet-table"])
         },
           
         (err: HttpErrorResponse) => {

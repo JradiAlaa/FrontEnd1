@@ -30,6 +30,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Ajouter projet',
+    icon: 'nb-plus-circled',
+    link: '/pages/ajoutProjet', 
+    selected : true , 
+    hidden: (isAdmin()&&isclient())
+  },
+  {
     title: 'Deposer projet',
     icon: 'nb-plus-circled',
     link: '/pages/tables/projet-table',
@@ -64,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
    {
     title: 'Time Tracking ',
     icon: 'nb-bar-chart',
-    link: '',
+    link: '/pages/calendar',
     hidden: (isAdmin()&&isdev()&&ischef())
   },
    {

@@ -88,8 +88,8 @@ export const NB_CORE_PROVIDERS = [
       },
       client: {
         view: '*',
-        view12 : '/pages/404'
-
+        view12 : '/pages/404',
+        edit: '*',
       },
       dev: {
         view2:'*',
@@ -100,7 +100,7 @@ export const NB_CORE_PROVIDERS = [
      //   parent: 'Chef', 
        view3:'*',
         create: '*',
-        edit: '*',
+      
         remove: '*',
         view12 : '/pages/404'
       },

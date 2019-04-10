@@ -1,48 +1,65 @@
+<nb-card-body *nbIsGranted="['view3','admin']"> body
+  Admin
+</nb-card-body>
+<nb-card-body *nbIsGranted="['view1','chef']"> Chef
+  Alooooooooooooo
+</nb-card-body>
+<nb-card-body *nbIsGranted="['view2','dev']"> Devvvvvvv
+  Alooooooooooooo
+</nb-card-body>
+
+
 <div class="row">
   <nb-card>
-    <nb-card-body> body Dev
-      <p> fdgfdg</p>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td><button class="btn btn-hero-danger btn-demo"> aaa </button></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+    <nb-card-body>
+      <a href="http://localhost/projectManagment/projet1/edb/11/12/6.pdf" target="_blank"> testttttt</a>
+
+    
+        <div class="panel panel-primary">
+          <div class="panel-heading">List of Files</div>
+          <div *ngFor="let file of fileUploads | async">
+            <div class="panel-body">
+             <!-- <ngx-dashboard [fileUpload]='file'></ngx-dashboard>  -->
+              <!-- <a href="{{fileUpload}}">{{file}} </a> 
+              <a href="{{fileUpload}}">{{fileUpload}} aaaaaaaa</a>  -->
+              <a href="http://localhost:8080/api/file/{{file.id}}">{{file.name}}</a>
+
+            </div>
+          </div>
+        
+      </div>
+
     </nb-card-body>
-    <nb-card-body *nbIsGranted="['view3','admin']"> body
-      Admin
-     </nb-card-body>
-     <nb-card-body *nbIsGranted="['view1','chef']"> Chef
-      Alooooooooooooo
-     </nb-card-body>
-     <nb-card-body *nbIsGranted="['view2','dev']"> Devvvvvvv
-        Alooooooooooooo
-       </nb-card-body>
-     
   </nb-card>
+</div>
+<div class="row">
+    <nb-card>
+      <nb-card-body>
+          <h1>  </h1>
 
+  
+  
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
 
+<div class="row">
+  <nb-card>
+    <nb-card-body>
+
+        <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+              {{progress.percentage}}%</div>
+          </div>
+           
+          <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)">
+          </label>
+           
+          <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+
+    </nb-card-body>
+  </nb-card>
 </div>

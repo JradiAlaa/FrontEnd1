@@ -1,0 +1,237 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+
+    <nb-card>
+      <nb-card-body>
+        <h2> projet N : {{detpr.reference}} </h2>
+        <br>
+        <br>
+        <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+    <nb-progress-bar [value]="5" status="primary" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '0' "></nb-progress-bar>
+
+     <nb-progress-bar [value]="10" status="primary" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '1' "></nb-progress-bar>
+     <nb-progress-bar [value]="25" status="danger" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '2' "></nb-progress-bar>
+   
+        </div>
+      </div>
+          <br>
+          <br>
+        <table class="table table-bordered table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Document </th>
+              <th scope="col">Action</th>
+              <th scope="col">Uploded document</th>
+              <th scope="col">Afficher</th>
+              <th scope="col">Etat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- --------- *****************  EDB ***************--------------------- -->
+
+            <tr>
+              <td>{{detpr.id }}</td>
+              <td>Chaier des charges </td>
+              <td>
+                <p *ngIf="detpr.etat == '0' ">
+                  <input type="file" (change)="selectFile($event)" *nbIsGranted="['view', 'client']">
+                </p>
+              </td>
+              <td>
+                <p *ngIf="detpr.etat == '0' ">
+                  <button class="btn btn-success" (click)="upload()" *nbIsGranted="['view', 'client']">Upload</button>
+                </p>
+              </td>
+              <td>
+                <p *ngFor="let l of lien1">
+                  <!-- <button class="btn btn-demo btn-success btn-hero"  (click)="download(l.nomfichier)"> {{l.nomfichier}} </button> -->
+                  <a href="http://localhost/projectManagment/projet/{{detpr.reference}}/edb/{{l.nomfichier}}"
+                    target="_blank">{{l.nomfichier}}</a>
+                </p>
+              </td>
+              <td *nbIsGranted="['edit', 'client']">
+                <p *ngFor="let l of lien1">
+                  <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
+                  <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"> au cours </button>
+                  <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                </p>
+              </td>
+              <td *nbIsGranted="['create', 'admin']">
+                <p *ngFor="let l of lien1">
+                  <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"
+                    (click)="accepter(l.id, l.idProjet)"> accepter {{l.idProjet}} </button>
+                  <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==1" (click)="refuser(l.id)">
+                    refuser {{l.id}} </button>
+                  <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+
+                </p>
+              </td>
+            </tr>
+            <!-- --------- *****************  CHIFFRAGE ***************--------------------- -->
+            <tr>
+              <td>{{detpr.id }}</td>
+              <td>Chiffrage</td>
+              <td>
+                  <p *ngIf="detpr.etat == '1' ">
+                    <input type="file" (change)="selectFile($event)" *nbIsGranted="['create', 'admin']">
+                  </p>
+                </td>
+                <td>
+                  <p *ngIf="detpr.etat == '1' ">
+                    <button class="btn btn-success" (click)="uploadChiffrage()" *nbIsGranted="['create', 'admin']">Upload</button>
+                  </p>
+                </td>
+                <td>
+                  <p *ngFor="let l of lienChiffrage">
+                    <!-- <button class="btn btn-demo btn-success btn-hero"  (click)="download(l.nomfichier)"> {{l.nomfichier}} </button> -->
+                    <a href="http://localhost/projectManagment/projet/{{detpr.reference}}/chiffrage/{{l.nomfichier}}"
+                      target="_blank">{{l.nomfichier}}</a>
+                  </p>
+                </td>
+                <td *nbIsGranted="['create', 'admin']">
+                  <p *ngFor="let l of lienChiffrage">
+                    <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
+                    <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"> au cours </button>
+                    <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                  </p>
+                </td>
+                <td *nbIsGranted="['edit', 'client']">
+                  <p *ngFor="let l of lienChiffrage">
+                    <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"
+                      (click)="accepterCh(l.id, l.idProjet)"> accepter {{l.idProjet}} </button>
+                    <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==1" (click)="refuserCh(l.id)">
+                      refuser {{l.id}} </button>
+                    <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+  
+                  </p>
+                </td>
+            </tr>
+            <tr>
+              <td>{{detpr.id }}</td>
+              <td>Livrable</td>
+
+            </tr>
+            <tr>
+              <td>{{detpr.id }}</td>
+              <td>Validation</td>
+
+            </tr>
+            <tr>
+              <td>{{detpr.id }}</td>
+
+              <td>Facturation</td>
+
+            </tr>
+            <tr>
+              <td>{{detpr.id }}</td>
+
+              <td>Payement</td>
+
+            </tr>
+
+
+
+
+          </tbody>
+        </table>
+      </nb-card-body>
+
+    </nb-card>
+  </div>
+</div>
+
+
+
+
+<div class="steppers-container row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-body>
+        <h1> Détail projet </h1>
+        <nb-stepper #stepper>
+
+          <nb-step [stepControl]="firstForm" label="Creer projet" [completed]="isCompleted">
+            <form [formGroup]="firstForm" class="step-container">
+              <p class="lorem">
+                Déposer le nom de votre projet
+              </p>
+              <div class="input-group">
+                <input type="text" value={{detpr.titre}} class="form-control" formControlName="firstCtrl"
+                  [(ngModel)]="projet1.titre" readonly
+                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+              <br>
+              <div class="input-group">
+                <input type="text" value={{detpr.description}} readonly class="form-control" formControlName="firstCtrl"
+                  [(ngModel)]="projet1.description"
+                  [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+              <button nbButton nbStepperNext>next</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="secondForm" label="Déposer EDB" *ngIf="detpr.etat == '2'">
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+              <p class="lorem">
+                Déposer votre cahier des charges
+              </p>
+              <div class="input-group">
+                <input type="file" class="form-control" formControlName="secondCtrl"
+                  [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>next</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="Reponse de l'admin">
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+              <p class="lorem">
+                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+              </p>
+              <div class="input-group">
+                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                  [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>Confirm</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="Validation/Refus">
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+              <p class="lorem">
+                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+              </p>
+              <div class="input-group">
+                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                  [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>Confirm</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="Third step">
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+              <p class="lorem">
+                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+              </p>
+              <div class="input-group">
+                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                  [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>Confirm</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+            <div class="step-container">
+              <h3>Wizard completed!</h3>
+              <button nbButton (click)="stepper.reset()">Try again</button>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

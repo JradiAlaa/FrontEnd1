@@ -1,39 +1,44 @@
 <nb-card>
-    <nb-card-header>
-  Demende d'ajout projet  </nb-card-header>
+  <nb-card-header>
+  Liste des projets   
+ </nb-card-header>
   
   <nb-card-body *nbIsGranted="['view3', 'admin']"> 
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Ref</th>
+            <th scope="col">Ajouté par </th>
             <th scope="col">Titre</th>
             <th scope="col">Description</th>
-            <th scope="col">Date Debut</th>
-            <th scope="col">Date Fin</th>
-            <th scope="col">Chaier des charges</th>
-            <th scope="col">Chaier des charges</th>
+            <th scope="col">Etat</th>
             <th scope="col">Etat</th>
           </tr>
         </thead>
         <tbody>
         
-          <tr *ngFor="let p of projet">
-            <td>{{p.id }}</td>
+          <tr *ngFor="let p of projet "  >
+             
+            <td>{{p.reference }}</td>
+            <td>{{p.user.email }}</td>
            <td>{{p.titre}}</td>
            <td>{{p.description}}</td>
-           <td>{{p.datedeb}}</td>
-           <td>{{p.datefin}}</td>
+           <td>
+              <p  *ngIf="p.etat == '0' "> EDB </p>
+
+              <nb-progress-bar [value]="10" status="primary" [displayValue]="true"  *ngIf="p.etat == '1' "></nb-progress-bar>
+              <nb-progress-bar [value]="25" status="danger" [displayValue]="true"   *ngIf="p.etat == '2' "></nb-progress-bar>
+         
+           </td>
            <td > 
-              <button class="btn btn-demo btn-success btn-hero" > approuver </button>
-          </td>
-          <td > 
-              <button class="btn btn-hero-danger btn-demo" > refuser </button>
+              <button class="btn btn-demo btn-success btn-hero"  (click)="getProjet(p.id)"> voir </button>
           </td>
          
+        
      </tr> 
         </tbody>
       </table>
+   
     </nb-card-body>
     <nb-card-body *nbIsGranted="['view', 'client']"> 
         <table class="table table-bordered">
@@ -42,10 +47,10 @@
                 <th scope="col">#</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
-                <th scope="col">Date Debut</th>
+                <th scope="col">Etat</th>
                 <th scope="col">Date Fin</th>
-                <th scope="col">Chaier des charges</th>
-                <th scope="col">Chaier des charges</th>
+                <!-- <th scope="col">Chaier des charges</th>
+                <th scope="col">Chaier des charges</th> -->
                 <th scope="col">Etat</th>
 
               </tr>
@@ -56,17 +61,16 @@
                 <td>{{p.id }}</td>
                <td>{{p.titre}}</td>
                <td>{{p.description}}</td>
-               <td>{{p.datedeb}}</td>
-               <td>{{p.datefin}}</td>
-               <td > 
+               <td>{{p.etat}}</td>
+               <!-- <td > 
                   <button class="btn btn-demo btn-success btn-hero" > approuver </button>
               </td>
               <td > 
                   <button class="btn btn-hero-danger btn-demo" > refuser </button>
-              </td>
+              </td> -->
               <td > 
-                  <button class="btn btn-hero-danger btn-demo" > Au cours  </button>
-              </td>
+                  <button class="btn btn-demo btn-success btn-hero"  (click)="getProjet(p.id)"> voir </button>
+                </td>
          </tr> 
             </tbody>
           </table>

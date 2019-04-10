@@ -3,6 +3,7 @@ import { GestionprojetService } from '../../../@core/data/gestionprojet.service'
 import { GestionuserService } from '../../../@core/data/gestionuser.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'listprojet',
@@ -14,7 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 `],
 })
 export class ListprojetComponent implements OnInit {
-  projet: any = []
+  projet: any = [] 
+  profil : any = []
+  profil1  : any = []
   projetClient: any = []
   projet1: object = {
     "id": null,
@@ -26,16 +29,51 @@ export class ListprojetComponent implements OnInit {
     "etat": "0", 
     "idUser":localStorage.getItem("idUser") , 
   } 
-  constructor(private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
+  name = 'Angular 5';
+  constructor(private sanitizer: DomSanitizer, private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
   id1 = parseInt( localStorage.getItem("idUser"))
  
   ngOnInit() {
+    
 
    //this.serv.getProjetByIdUser(parseInt(localStorage.getItem("idUser")))
    this.serv.getProjets()
       .subscribe(
         data => {
-          this.projet = data
+          this.projet = data ;
+
+        },
+        err => {
+          console.log(err)
+        }
+      )
+      this.serv.getProjets()
+      .subscribe(
+        data => {
+          this.projet = data ;
+          console.log("all projet :  ",data)
+
+
+        },
+        err => {
+          console.log(err)
+        }
+      )
+      this.userr.getProfilById(parseInt(localStorage.getItem("idUser")))
+      .subscribe(
+        data => {
+          this.profil = data
+        },
+        err => {
+          console.log(err)
+        }
+      )
+      this.userr.getProfil()
+      .subscribe(
+        data => {
+          this.profil1 = data
+          console.log("a ll profik ",data)
+
         },
         err => {
           console.log(err)
@@ -51,6 +89,9 @@ export class ListprojetComponent implements OnInit {
         }
       )
       
+    }
+    getProjet(id:number){
+      this.route.navigate(['pages/detailProjet',id])
     }
 
       //--------------------- 

@@ -19,6 +19,10 @@ export class GestionprojetService {
     return this.http.get("http://localhost:8080/api/projets/id/"+id) ;
 
   }
+  getProjetById(id:number){
+    return this.http.get("http://localhost:8080/api/projets/"+id) ;
+
+  }
 
   updateProjet(proj:any){
     return this.http.put("http://localhost:8080/api/projets",proj) ;
@@ -26,4 +30,5 @@ export class GestionprojetService {
    suppProjets(id:number) {
     return this.http.delete("http://localhost:8080/api/projets/"+id) ;
   }
+  
   }

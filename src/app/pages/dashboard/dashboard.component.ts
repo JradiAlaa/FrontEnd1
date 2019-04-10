@@ -1,22 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 //import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { AuthGuard } from '../../@core/data/auth-guard.service';
 import { NbAuthJWTToken } from '../../auth';
+import { Observable } from 'rxjs';
+import { UploadfileserviceService } from '../../@core/data/uploadfileservice.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'ngx-dashboard',
+  selector: 'ngx-dashboard',  
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent  implements OnInit  {
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  progress: { percentage: number } = { percentage: 0 };
+  @Input() fileUpload: string;
+  showFile = false;
+  fileUploads: Observable<string[]>;
+ 
+  constructor(private uploadService: UploadfileserviceService) { }
+ 
+  ngOnInit() {
+    this.fileUploads = this.uploadService.getFiles();
+  }
+ 
+  showFiles(enable: boolean) {
+    this.showFile = enable;
+ 
+    if (enable) {
+      this.fileUploads = this.uploadService.getFiles();
+    }
+
+    
+  }
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload() {
+   // this.progress.percentage = 0;
+ 
+    this.currentFileUpload = this.selectedFiles.item(0);
+    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        console.log('File is completely uploaded!');
+      }
+    });
+ 
+    this.selectedFiles = undefined;
+  }
+
+
+
   //constructor(private auth :AuthGuard ) {}
 //  private token: NbAuthJWTToken
-  ngOnInit() {
+ // ngOnInit() {
   //  localStorage.getItem(this.token.getPayload()['role']);
   //  console.log("test token dash : " ,this.token.getPayload()['role']) ; 
 
   //  console.log("test can actibe") ; 
   //  this.auth.canActivate() ; 
-}
+//}
 }
 
 
