@@ -14,7 +14,7 @@ export class ConfprofilComponent implements OnInit {
   //profils : Profil[] = [] ; 
   
   profil: object = {
-    "id": null,
+    "id": localStorage.getItem("idUser"),
     "emailSec": "",
     "nom": "",
     "prenom": "",
@@ -36,7 +36,7 @@ export class ConfprofilComponent implements OnInit {
       "id": localStorage.getItem("idUser") , 
       "etat": "1"
     } ;
-    this.prof.addProfil(this.profil).subscribe(data=> {
+    this.prof.updateProfil(this.profil).subscribe(data=> {
       console.log("email ", this.profil['emailSec'])
       this.user.updateUsers(dataUser).subscribe(
         res => {

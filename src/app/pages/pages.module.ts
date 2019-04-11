@@ -11,6 +11,8 @@ import { ConfprofilComponent } from './confprofil/confprofil.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DetailPtrojetComponent } from './detail-ptrojet/detail-ptrojet.component';
 import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
+import { ModalComponent } from './modal/modal.component';
+import { ModallComponent } from './modal/modall/modall.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -31,6 +33,9 @@ const PAGES_COMPONENTS = [
     CalendarComponent,
     DetailPtrojetComponent,
     AjoutProjetComponent,
+    ModalComponent,
+    ModallComponent,
+    
    
   ],
 })

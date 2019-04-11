@@ -30,6 +30,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Modal',
+    icon: 'nb-home',
+    link: '/pages/modal',
+    home: true,
+  },
+  {
     title: 'Ajouter projet',
     icon: 'nb-plus-circled',
     link: '/pages/ajoutProjet', 

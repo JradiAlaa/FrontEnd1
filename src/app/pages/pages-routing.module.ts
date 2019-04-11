@@ -9,6 +9,7 @@ import { ConfprofilComponent } from './confprofil/confprofil.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DetailPtrojetComponent } from './detail-ptrojet/detail-ptrojet.component';
 import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
+import { ModalComponent } from './modal/modal.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,11 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+     
+    },
+    {
+      path: 'modal',
+      component: ModalComponent,
      
     },
     

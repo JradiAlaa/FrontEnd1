@@ -11,12 +11,16 @@ import { UploadfileserviceService } from '../../@core/data/uploadfileservice.ser
   templateUrl: './detail-ptrojet.component.html',
   styleUrls: ['./detail-ptrojet.component.scss']
 })
-export class DetailPtrojetComponent implements OnInit {
+ 
+export class DetailPtrojetComponent implements OnInit  {
   progress: { percentage: number } = { percentage: 0 };
 
    nomfichier : any = {} ;
    lien1 : object = {}; 
    lienChiffrage : object = {};
+   lienLivrable : object = {};
+   lienEssai : object = {};
+
   selectedFiles: FileList;
   currentFileUpload: File;
   id: number;
@@ -40,7 +44,7 @@ export class DetailPtrojetComponent implements OnInit {
                private userr :GestionuserService,
                 private route: Router,
                 private uploadService: UploadfileserviceService,
-                private route1: ActivatedRoute) {
+                private route1: ActivatedRoute                ) {
   }
 
   ngOnInit() {
@@ -69,6 +73,11 @@ export class DetailPtrojetComponent implements OnInit {
 
     } ) 
     this.uploadService.getChiffByIdPr(this.id).subscribe(data => {this.lienChiffrage = data } ) 
+    this.uploadService.geLivrableByIdPr(this.id).subscribe(data => {this.lienLivrable = data 
+      console.log("t get livrable by id projet",  this.lienLivrable)
+    } ) 
+    this.uploadService.geEssaiByIdPr(this.id).subscribe(data => {this.lienEssai = data } ) 
+
 
     this.firstForm = this.fb.group({
       firstCtrl: ['', Validators.required],
@@ -141,6 +150,86 @@ upload() {
       }
    
      //----------------- FIN CHIFFRAGE ---------------
+       //--------------- Upload Livrable ------------------
+  uploadLivrable() {
+    let idProjet = this.detpr['id']
+    let ref = this.detpr['reference']
+     this.currentFileUpload = this.selectedFiles.item(0);
+     this.uploadService.addLivrable(this.currentFileUpload,idProjet,ref).subscribe(event => {
+     
+       this.currentFileUpload = undefined;
+
+       this.ngOnInit()
+   
+     });
+     this.selectedFiles = undefined;
+     }
+
+     accepterLivrable(id :  number , idp : number) {
+      var upLivrable = {  "id": id ,  "etat": "2" } ;
+   
+     var upProjet = {  "idp": idp , "etat": "3" } ;
+     this.uploadService.updateLivrable(upLivrable).subscribe( 
+        res => { console.log(res); this.ngOnInit() },
+         (err) => {console.log(err); } ) ;
+         this.serv.updateProjet(upProjet).subscribe(
+         res => {console.log(res);this.ngOnInit() },
+         (err) => {
+           console.log(err);}
+       ) ;
+     }
+     refuserLivrable(id :  number ) {
+       var upLivrable = {
+        "id": id , 
+        "etat": "0"
+      } ;
+         this.uploadService.updateLivrable(upLivrable).subscribe(
+          res => { console.log(res); this.ngOnInit()  },
+          (err) => {console.log(err);  }
+        ) ;
+      }
+   
+     //----------------- FIN Livrable  ---------------
+      //--------------- Upload Version d'essai ------------------
+  uploadEssai() {
+    let idProjet = this.detpr['id']
+    let ref = this.detpr['reference']
+     this.currentFileUpload = this.selectedFiles.item(0);
+     this.uploadService.addEssai(this.currentFileUpload,idProjet,ref).subscribe(event => {
+     
+       this.currentFileUpload = undefined;
+      
+       this.ngOnInit()
+   
+     });
+     this.selectedFiles = undefined;
+     }
+
+     accepterEssai(id :  number , idp : number) {
+      var upEssai = {  "id": id ,  "etat": "2" } ;
+   
+     var upProjet = {  "idp": idp , "etat": "4" } ;
+     this.uploadService.updateEssai(upEssai).subscribe( 
+        res => { console.log(res); this.ngOnInit() },
+         (err) => {console.log(err); } ) ;
+         this.serv.updateProjet(upProjet).subscribe(
+         res => {console.log(res);this.ngOnInit() },
+         (err) => {
+           console.log(err);}
+       ) ;
+     }
+     refuserEssai(id :  number ) {
+       var upEssai = {
+        "id": id , 
+        "etat": "0"
+      } ;
+         this.uploadService.updateEssai(upEssai).subscribe(
+          res => { console.log(res); this.ngOnInit()  },
+          (err) => {console.log(err);  }
+        ) ;
+      }
+   
+     //----------------- FIN Version d'essai  ---------------
   download(nom : string) {
     let idProjet = this.detpr['id']
     let ref = this.detpr['reference']

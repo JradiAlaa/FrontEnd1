@@ -42,7 +42,7 @@ export class UploadfileserviceService {
   updateEdb(edb :any){
     return this.http.put('http://localhost:8080/api/projet/edb',edb) ;
   }
-    // ----------------- Chiffrage ser
+    // ----------------- Chiffrage ser ------------------------ 
 
   addChiff(file: File,  id : Number , ref : String): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
@@ -63,5 +63,54 @@ export class UploadfileserviceService {
   updateChiff(chiff :any){
     return this.http.put('http://localhost:8080/api/projet/chiffrage',chiff) ;
   }
+
+  //--------- ************** FIN chiffrage ******************** ----------------
+
+  // ----------------- Livrable ser ------------------------ 
+
+  addLivrable(file: File,  id : Number , ref : String): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+ 
+    formdata.append('file', file);
+   
+    const req = new HttpRequest('POST', 'http://localhost:8080/api/projet/ajoutLivrable/'+ref+'/'+id, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
+  }
+  geLivrableByIdPr(projetId : Number): Observable<any> {
+    return this.http.get('http://localhost:8080/api/projet/detLivrable/'+projetId);
+  }
+  
+  updateLivrable(chiff :any){
+    return this.http.put('http://localhost:8080/api/projet/Livrable',chiff) ;
+  }
+
+  //--------- ************** FIN chiffrage ******************** ----------------
+   // ----------------- Essai ser ------------------------ 
+
+   addEssai(file: File,  id : Number , ref : String): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+ 
+    formdata.append('file', file);
+   
+    const req = new HttpRequest('POST', 'http://localhost:8080/api/projet/ajoutEssai/'+ref+'/'+id, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
+  }
+  geEssaiByIdPr(projetId : Number): Observable<any> {
+    return this.http.get('http://localhost:8080/api/projet/detEssai/'+projetId);
+  }
+  
+  updateEssai(chiff :any){
+    return this.http.put('http://localhost:8080/api/projet/Essai',chiff) ;
+  }
+
+  //--------- ************** FIN Version d essai ******************** ----------------
   
 }
