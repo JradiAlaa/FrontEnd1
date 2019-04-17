@@ -28,6 +28,7 @@ export class ProjetTableComponent implements OnInit {
     "titre": "",
     "reference":  "",
     "etat": "0",
+    "chefProjet": "",
     "userId": localStorage.getItem("idUser"),
     "idUser": localStorage.getItem("idUser"),
   }

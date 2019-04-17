@@ -4,6 +4,8 @@ import { GestionuserService } from '../../../@core/data/gestionuser.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { WindowComponent } from '../../detail-ptrojet/window/window.component';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'listprojet',
@@ -30,7 +32,10 @@ export class ListprojetComponent implements OnInit {
     "idUser":localStorage.getItem("idUser") , 
   } 
   name = 'Angular 5';
-  constructor(private sanitizer: DomSanitizer, private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
+  constructor(private sanitizer: DomSanitizer,
+    private dialgo: NbDialogService,
+
+     private serv: GestionprojetService, private userr :GestionuserService, private route: Router) { }
   id1 = parseInt( localStorage.getItem("idUser"))
  
   ngOnInit() {
@@ -68,6 +73,15 @@ export class ListprojetComponent implements OnInit {
           console.log(err)
         }
       )
+      this.userr.getUserByRole('chef')
+      .subscribe(
+        data => {
+          console.log("test roleeeeeeeeeeeee" ,data)
+        },
+        err => {
+          console.log(err)
+        }
+      )
       this.userr.getProfil()
       .subscribe(
         data => {
@@ -93,6 +107,18 @@ export class ListprojetComponent implements OnInit {
     getProjet(id:number){
       this.route.navigate(['pages/detailProjet',id])
     }
+
+    win(id:number)  {
+      this.dialgo.open(WindowComponent, {
+        context: {
+          title: 'Message',
+          aff : '1' , 
+          idpp : id.toString() , 
+        }, 
+       
+      })
+      ;
+    } ; 
 
       //--------------------- 
   

@@ -11,8 +11,9 @@ import { ConfprofilComponent } from './confprofil/confprofil.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DetailPtrojetComponent } from './detail-ptrojet/detail-ptrojet.component';
 import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
-import { ModalComponent } from './modal/modal.component';
-import { ModallComponent } from './modal/modall/modall.component';
+import { DetailPtrojetModule } from './detail-ptrojet/detail-ptrojet.module';
+import { MessagerieComponent } from './messagerie/messagerie.component';
+import { MessagerieModulModule } from './messagerie/messagerie-modul.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -25,17 +26,20 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     ProfilModule,
     MiscellaneousModule,
+    DetailPtrojetModule,
+    MessagerieModulModule
+  
+
   ],
   declarations: [
     ...PAGES_COMPONENTS,
     GestionutulisateurComponent,
     ConfprofilComponent,
     CalendarComponent,
-    DetailPtrojetComponent,
+   // DetailPtrojetComponent,
     AjoutProjetComponent,
-    ModalComponent,
-    ModallComponent,
-    
+   //MessagerieComponent,
+
    
   ],
 })

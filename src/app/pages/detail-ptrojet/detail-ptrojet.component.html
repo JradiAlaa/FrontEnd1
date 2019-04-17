@@ -9,11 +9,15 @@
         <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
+            <button nbButton status="success" size="xsmall" hero  (click)=testbtDiag()> dialg </button>
+
     <nb-progress-bar [value]="5" status="primary" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '0' "></nb-progress-bar>
      <nb-progress-bar [value]="10" status="primary" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '1' "></nb-progress-bar>
      <nb-progress-bar [value]="25" status="danger" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '2' "></nb-progress-bar>
      <nb-progress-bar [value]="60" status="success" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '3' "></nb-progress-bar>
      <nb-progress-bar [value]="90" status="success" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '4' "></nb-progress-bar>
+     <nb-progress-bar [value]="95" status="success" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '5' "></nb-progress-bar>
+     <nb-progress-bar [value]="100" status="success" [displayValue]="true" size="lg"  *ngIf="detpr.etat == '6' "></nb-progress-bar>
 
         </div>
       </div>
@@ -32,12 +36,11 @@
           </thead>
           <tbody>
             <!-- --------- *****************  EDB ***************--------------------- -->
-
             <tr>
               <td>{{detpr.id }}</td>
               <td>Chaier des charges </td>
               <td>
-                <p *ngIf="detpr.etat == '0' ">
+                <p *ngIf="detpr.etat == '0' " >
                   <input type="file" (change)="selectFile($event)" *nbIsGranted="['view', 'client']">
                 </p>
               </td>
@@ -62,7 +65,7 @@
                 <div *ngFor="let l of lien1">
                   <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
                   <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"> au cours </button>
-                  <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                  <button nbButton status="success" size="xsmall" hero    *ngIf="l.etat==2"> validée </button>
                   <hr>
                 </div>
               </td>
@@ -215,25 +218,106 @@
           </tr>
         
         <!-- ----------------------- ******************* FIN Version d'essai ********************** -->
-         
-            <tr>
-              <td>{{detpr.id }}</td>
+                 <!-- <!  ----------- ********************* Facturation ******************----------------------------- --> 
+                 <tr>
+                    <td>{{detpr.id }}</td>
+                    <td>Facturation</td>
+                    <td>
+                        <p *ngIf="detpr.etat == '5' || detpr.etat == '4' ">
+                          <input type="file" (change)="selectFile($event)" *nbIsGranted="['create', 'admin']">
+                        </p>
+                      </td>
+                      <td>
+                        <p *ngIf="detpr.etat == '5' || detpr.etat == '4' ">
+                          <button class="btn btn-success" (click)="uploadFact()" *nbIsGranted="['create', 'admin']">Upload</button>
+                        </p>
+                      </td>
+                      <td >
+                        <div *ngFor="let l of lienFact">
+                          <!-- <button class="btn btn-demo btn-success btn-hero"  (click)="download(l.nomfichier)"> {{l.nomfichier}} </button> -->
+                          <a href="http://localhost/projectManagment/projet/{{detpr.reference}}/Facturation/{{l.nomfichier}}"
+                            target="_blank">
+                            <button class="btn btn-xs  btn-demo btn-info    btn-hero" > {{l.nomfichier}} </button>
+        
+                          </a> 
+        
+                            <hr>
+                        </div>
+                      </td>
+                      <td *nbIsGranted="['create', 'admin']" >
+                        <div *ngFor="let l of lienFact">
+                          <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
+                          <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"> au cours </button>
+                          <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                          <hr>
+                        </div>
+                      </td>
+                      <td *nbIsGranted="['edit', 'client']">
+                        <div *ngFor="let l of lienFact">
+                            <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
+                          <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1" (click)="accepterFact(l.id, l.projetId)"> accepter {{l.projetId}} </button>
+                          <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==1" (click)="refuserFact(l.id)"> refuser {{l.id}} </button>
+                          <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                          <hr>
+                        </div>
+                      </td>
+                  </tr>
+                
+                <!-- ----------------------- ******************* FIN Facturation ********************** -->
+                 
+        
+              <!-- --------- *****************  Oayement ***************--------------------- -->
 
-              <td>Facturation</td>
-
-            </tr>
-            <tr>
-              <td>{{detpr.id }}</td>
-
-              <td>Payement</td>
-
-            </tr>
+              <tr>
+                  <td>{{detpr.id }}</td>
+                  <td>Payement </td>
+                  <td>
+                    <p *ngIf="detpr.etat == '5' ">
+                      <input type="file" (change)="selectFile($event)" *nbIsGranted="['view', 'client']">
+                    </p>
+                  </td>
+                  <td>
+                    <p *ngIf="detpr.etat == '5' ">
+                      <button class="btn btn-success" (click)="uploadPayement()" *nbIsGranted="['view', 'client']">Upload</button>
+                    </p>
+                  </td>
+                  <td>
+                    <div *ngFor="let l of lienPayement">
+                      <a href="http://localhost/projectManagment/projet/{{detpr.reference}}/Payement/{{l.nomfichier}}"
+                        target="_blank">
+                        <button class="btn btn-xs  btn-demo btn-info    btn-hero" > {{l.nomfichier}} </button>
+    
+                      </a>
+                    <hr>
+                    </div>
+    
+                  </td>
+                  <td *nbIsGranted="['edit', 'client']">
+                    <div *ngFor="let l of lienPayement">
+                      <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==0"> refusée </button>
+                      <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1"> au cours </button>
+                      <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                      <hr>
+                    </div>
+                  </td>
+                  <td *nbIsGranted="['create', 'admin']">
+                    <div *ngFor="let l of lienPayement">
+                        <button class="btn btn-xs  btn-demo btn-warning   btn-hero" *ngIf="l.etat==1" (click)="accepterPayement(l.id, l.projetId)"> accepter {{l.projetId}} </button>
+                        <button class="btn btn-xs  btn-demo btn-danger    btn-hero" *ngIf="l.etat==1" (click)="refuserPayement(l.id)"> refuser {{l.id}} </button>
+                        <button class="btn btn-xs  btn-demo btn-success    btn-hero" *ngIf="l.etat==2"> validée </button>
+                                  <hr>
+                      </div>
+                  </td>
+                </tr>
 
 
 
 
           </tbody>
         </table>
+        <button class="btn btn-xs  btn-demo btn-success    btn-hero" > Archiver  </button>
+        <button class="btn btn-xs  btn-demo btn-success    btn-hero" > Colturée  </button>
+
       </nb-card-body>
 
     </nb-card>

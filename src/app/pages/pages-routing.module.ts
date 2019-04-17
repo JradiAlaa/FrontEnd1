@@ -9,7 +9,8 @@ import { ConfprofilComponent } from './confprofil/confprofil.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DetailPtrojetComponent } from './detail-ptrojet/detail-ptrojet.component';
 import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
-import { ModalComponent } from './modal/modal.component';
+import { WindowComponent } from './detail-ptrojet/window/window.component';
+import { MessagerieComponent } from './messagerie/messagerie.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,7 +23,7 @@ const routes: Routes = [{
     },
     {
       path: 'modal',
-      component: ModalComponent,
+      component: DashboardComponent,
      
     },
     
@@ -37,8 +38,18 @@ const routes: Routes = [{
      
     },
     {
+      path: 'messagerie',
+      component: MessagerieComponent,
+     
+    },
+    {
       path: 'detailProjet/:id',
       component: DetailPtrojetComponent,
+     
+    },
+    {
+      path: 'messageinfo/:id',
+      component: WindowComponent,
      
     },
     {

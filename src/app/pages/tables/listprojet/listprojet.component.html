@@ -31,9 +31,15 @@
               <nb-progress-bar [value]="25" status="danger" [displayValue]="true"   *ngIf="p.etat == '2' "></nb-progress-bar>
          
            </td>
-           <td > 
-           
-        </td>
+          
+            <td>    <p  *ngIf="p.chefProjet == '' ">  
+                 <button class="btn btn-demo btn-success btn-hero"  (click)="win(p.id)"> Ajouter </button>
+            </p>
+            <p  *ngIf="p.chefProjet != '' ">  
+                {{p.chefProjet }}
+           </p>
+          </td>
+       
            <td > 
               <button class="btn btn-demo btn-success btn-hero"  (click)="getProjet(p.id)"> Consulter </button>
           </td>

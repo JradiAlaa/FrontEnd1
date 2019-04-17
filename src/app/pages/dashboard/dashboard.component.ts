@@ -5,6 +5,9 @@ import { NbAuthJWTToken } from '../../auth';
 import { Observable } from 'rxjs';
 import { UploadfileserviceService } from '../../@core/data/uploadfileservice.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { NbDialogService, NbWindowService } from '@nebular/theme';
+import { ProfilComponent } from '../profil/profil.component';
+import { GestionuserService } from '../../@core/data/gestionuser.service';
 
 @Component({
   selector: 'ngx-dashboard',  
@@ -17,11 +20,17 @@ export class DashboardComponent  implements OnInit  {
   @Input() fileUpload: string;
   showFile = false;
   fileUploads: Observable<string[]>;
- 
-  constructor(private uploadService: UploadfileserviceService) { }
- 
+  user1: Object;
+
+  constructor(private uploadService: UploadfileserviceService,
+    private dialogService: NbDialogService, 
+    private windowService: NbWindowService,
+    private userr :GestionuserService,
+    ) { }
   ngOnInit() {
     this.fileUploads = this.uploadService.getFiles();
+
+  
   }
  
   showFiles(enable: boolean) {
@@ -52,7 +61,11 @@ export class DashboardComponent  implements OnInit  {
     this.selectedFiles = undefined;
   }
 
+  openWindowForm() {
+    this.windowService.open(ProfilComponent, { title: `Window` });
+  }
 
+  
 
   //constructor(private auth :AuthGuard ) {}
 //  private token: NbAuthJWTToken

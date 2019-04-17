@@ -112,5 +112,51 @@ export class UploadfileserviceService {
   }
 
   //--------- ************** FIN Version d essai ******************** ----------------
+   // ----------------- Facturation ser ------------------------ 
+
+   addFacture(file: File,  id : Number , ref : String): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+ 
+    formdata.append('file', file);
+   
+    const req = new HttpRequest('POST', 'http://localhost:8080/api/projet/ajoutFacture/'+ref+'/'+id, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
+  }
+  geFactureByIdPr(projetId : Number): Observable<any> {
+    return this.http.get('http://localhost:8080/api/projet/detFacture/'+projetId);
+  }
+  
+  updateFacture(chiff :any){
+    return this.http.put('http://localhost:8080/api/projet/Facture',chiff) ;
+  }
+
+  //--------- ************** FIN Facturation  ******************** ----------------
+   // ----------------- Payement  service ------------------------ 
+
+   addPayement(file: File,  id : Number , ref : String): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+ 
+    formdata.append('file', file);
+   
+    const req = new HttpRequest('POST', 'http://localhost:8080/api/projet/ajoutPayement/'+ref+'/'+id, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+ 
+    return this.http.request(req);
+  }
+  getPayementByIdPr(projetId : Number): Observable<any> {
+    return this.http.get('http://localhost:8080/api/projet/detPayement/'+projetId);
+  }
+  
+  updatePayement(chiff :any){
+    return this.http.put('http://localhost:8080/api/projet/Payement',chiff) ;
+  }
+
+  //--------- ************** FIN Payement  ******************** ----------------
   
 }

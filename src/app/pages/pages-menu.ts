@@ -83,7 +83,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
    {
     title: 'Boite de message',
     icon: 'nb-email',
-    link: '',
+    link: '/pages/messagerie',
     
   },
    {

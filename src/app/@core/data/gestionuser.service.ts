@@ -23,6 +23,10 @@ export class GestionuserService  {
     return this.http.get("http://localhost:8080/api/users/"+email) ; 
  
    }
+   getUserByRole(role:string){
+    return this.http.get("http://localhost:8080/api/users/findrole/"+role) ; 
+ 
+   }
   
    addUsers(user:any){
     return this.http.post("http://localhost:8080/api/users",user) ;

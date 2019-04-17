@@ -1,0 +1,44 @@
+<nb-card>
+    <nb-card-header>
+      <p class="chart-description">Boite des messages.</p>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+          <div class="chat-container col-md-12 col-lg-12 col-xxxl-12">
+              <div class="chart-features">
+              
+                  <div class="form-group col-sm-12">
+                  <select class="form-control"  [(ngModel)]="msgSend.reciver" (change)="onChange($event)"> 
+                      <option *ngFor="let opt of user" [value]="opt.id" [selected]="opt.id == true" >{{opt.email}}</option>
+  
+                      </select>
+                  </div>
+               
+              </div>
+            </div>
+      </div>
+      <div class="row">
+                <div class="chat-container col-md-12 col-lg-12 col-xxxl-12">
+          <nb-chat title="Nebular Conversational UI" size="large" status="success">
+            <nb-chat-message *ngFor="let msg of msg12"
+                             [type]="msg.type"
+                             [message]="msg.texte"
+                             [reply]="msg.texte"
+                             [sender]="msg.user.email"
+                             [date]="msg.createdAt"
+                             [files]="msg.files"
+                             [quote]="msg.quote"
+                             [latitude]="msg.latitude"
+                             [longitude]="msg.longitude"
+                             [avatar]="msg.user.avatar">
+            </nb-chat-message>
+  
+            <nb-chat-form (send)="sendMsgg($event)" [dropFiles]="true">
+            </nb-chat-form>
+          </nb-chat>
+        </div>
+    
+      </div>
+    </nb-card-body>
+  </nb-card>
+  
