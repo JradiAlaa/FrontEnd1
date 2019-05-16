@@ -10,7 +10,6 @@ import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
-
 @Component({
   selector: 'nb-login',
   templateUrl: './login.component.html',
@@ -32,13 +31,17 @@ export class NbLoginComponent {
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected options = {},
               protected cd: ChangeDetectorRef,
-              protected router: Router) {
+              protected router: Router ) {
 
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
     this.rememberMe = this.getConfigValue('forms.login.rememberMe');
+    console.log("in Comp Login  :", localStorage.getItem('role')) ; 
+                localStorage.removeItem('role') ;
+              localStorage.clear() ; 
+
   }
 
   login(): void {
@@ -51,6 +54,7 @@ export class NbLoginComponent {
 
       if (result.isSuccess()) {
       //  this.router.navigate(["/pages/dashboard"])
+      // localStorage.setItem("role","admin");
         this.messages = result.getMessages();
       } else {
         this.errors = result.getErrors();

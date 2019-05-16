@@ -27,36 +27,43 @@ export class MessagerieComponent implements OnInit , AfterViewInit{
     "reciver": "" ,
     "userId": localStorage.getItem("idUser"),
   }
+  interval: any;
 
   constructor(protected chatService: MessagerieServiceService,
     private use : GestionuserService,
     private route: Router) {
     
   }
+getData1(){
+  this.use.getUsers()
+  .subscribe(
+    data => {
+      this.user = data
+      console.log(data)
 
+    },
+    err => {
+      console.log(err)
+    }
+  )
+
+  this.chatService.geMsgsIdUserIdReciver(Number(localStorage.getItem("idUser")),this.msgSend['reciver']).subscribe
+  (
+    data => {
+      this.msg12 = data 
+      console.log("test message ", data)
+
+    }
+  )
+}
 
   ngOnInit()  {
 
-    this.use.getUsers()
-    .subscribe(
-      data => {
-        this.user = data
-        console.log(data)
+    this.getData1();
 
-      },
-      err => {
-        console.log(err)
-      }
-    )
-
-    this.chatService.geMsgsIdUserIdReciver(Number(localStorage.getItem("idUser")),this.msgSend['reciver']).subscribe
-    (
-      data => {
-        this.msg12 = data 
-        console.log("test message ", data)
-
-      }
-    )
+    this.interval= setInterval( ()=>{
+      this.getData1();
+    },5000 );
   
 
   };

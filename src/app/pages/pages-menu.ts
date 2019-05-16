@@ -1,25 +1,25 @@
 import { NbMenuItem } from '@nebular/theme';
 
-function  isAdmin() : boolean {
-  console.log("++++++++++++++11", localStorage.getItem("role")) ;
+function  isAdmin() : boolean {  
+  console.log("++++++++++++++11", sessionStorage.getItem("role")) ;
  // console.log("testtt token get", token.getPayload['role'])
  // var tokenPayload = token.getPayload['role'] ;
- if ( localStorage.getItem("role")=="admin") return false 
+ if ( sessionStorage.getItem("role")=="admin") return false 
  else return true 
 }
 function  ischef() : boolean {
-  console.log("++++++++++++++11", localStorage.getItem("role"))
- if ( localStorage.getItem("role")=="chef") return false 
+  console.log("++++++++++++++11", sessionStorage.getItem("role"))
+ if ( sessionStorage.getItem("role")=="chef") return false 
  else return true 
 }
 function  isclient() : boolean {
-  console.log("++++++++++++++11", localStorage.getItem("role"))
- if ( localStorage.getItem("role")=="client") return false 
+  console.log("++++++++++++++11", sessionStorage.getItem("role"))
+ if ( sessionStorage.getItem("role")=="client") return false 
  else return true 
 }
 function  isdev() : boolean {
-  console.log("++++++++++++++11", localStorage.getItem("role"))
- if ( localStorage.getItem("role")=="dev") return false 
+  console.log("++++++++++++++11", sessionStorage.getItem("role"))
+ if ( sessionStorage.getItem("role")=="dev") return false 
  else return true 
 }
 export const MENU_ITEMS: NbMenuItem[] = [
@@ -40,21 +40,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-plus-circled',
     link: '/pages/ajoutProjet', 
     selected : true , 
-    hidden: (isAdmin()&&isclient())
+    hidden: (isAdmin() && isclient() )
   },
+  
   {
     title: 'Deposer projet',
     icon: 'nb-plus-circled',
     link: '/pages/tables/projet-table',
     selected : true , 
-    hidden: (isAdmin()&&isclient())
+    hidden: (isAdmin() && isclient())
   },
   
    {
     title: 'Liste de demande projet',
     icon: 'nb-list',
     link: '/pages/tables/list-projet-table',
-    hidden: (isAdmin()&&isclient()&&ischef())
+    hidden: (isAdmin() && isclient() && ischef())
   },
    {
     title: 'Mes Projets',
@@ -72,7 +73,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Suivre projet ',
     icon: 'nb-loop-circled',
     link: '',
-    hidden: (isAdmin()&&isclient())
+    hidden: (isAdmin() && isclient())
   },
    {
     title: 'Time Tracking ',

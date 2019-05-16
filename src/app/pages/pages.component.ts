@@ -13,9 +13,10 @@ import { RoleProvider } from '../@core/data/role-provider.service';
   `,
 })
 export class PagesComponent {
-
   //menu = MENU_ITEMS;
  getMenu() {
+
+  //console.log("Test Menu "  + localStorage.getItem("role")+ " "+ localStorage.getItem("auth_app_token") );
   // console.log("++++++++++++++", localStorage.getItem("role"))
   if ( localStorage.getItem("etat")=="0") return firstauth
   else return MENU_ITEMS

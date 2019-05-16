@@ -7,7 +7,7 @@ Gestion  des Comptes   </nb-card-header>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Email</th>
-            <th scope="col">Statut</th>
+            <th scope="col">Action </th>
             <th scope="col">Statut</th>
           </tr>
         </thead>
@@ -18,9 +18,10 @@ Gestion  des Comptes   </nb-card-header>
            <td>{{u.email}}</td>
            <td > 
               <button class="btn btn-demo btn-success btn-hero" (click)="addUser1(u.id)"> approuver </button>
+              <button class="btn btn-demo btn-danger btn-hero" (click)="deleteUser(u.id)"> refuser </button>
           </td>
           <td > 
-              <button class="btn btn-hero-danger btn-demo" (click)="deleteUser(u.id)"> refuser </button>
+              
           </td>
      </tr> 
         </tbody>

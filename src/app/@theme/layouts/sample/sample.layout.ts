@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
   NbMediaBreakpoint,
@@ -10,6 +10,7 @@ import {
 } from '@nebular/theme';
 
 import { StateService } from '../../../@core/data/state.service';
+import { NbAuthService, NbAuthJWTToken } from '../../../auth';
 
 // TODO: move layouts into the framework
 @Component({
@@ -25,9 +26,9 @@ import { StateService } from '../../../@core/data/state.service';
                    tag="menu-sidebar"
                    responsive
                    [end]="sidebar.id === 'end'">
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
+        <nb-sidebar-header >
           <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>Support Us</span>
+            <i class="ion ion-social-github"></i> <span>TakenTechs</span>
           </a>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
@@ -59,7 +60,7 @@ import { StateService } from '../../../@core/data/state.service';
     </nb-layout>
   `,
 })
-export class SampleLayoutComponent implements OnDestroy {
+export class SampleLayoutComponent implements OnDestroy, OnInit {
 
   subMenu: NbMenuItem[] = [
     {
@@ -72,12 +73,19 @@ export class SampleLayoutComponent implements OnDestroy {
   private alive = true;
 
   currentTheme: string;
-
+  user: {id,role};
   constructor(protected stateService: StateService,
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,              
+            
+              private authService: NbAuthService
+              
+              ) {
+                
+                console.log(" alaaaaaaa");
+                console.log(" menu : "+localStorage.getItem("role"))
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -107,7 +115,27 @@ export class SampleLayoutComponent implements OnDestroy {
       .subscribe(theme => {
         this.currentTheme = theme.name;
     });
+
+    
   }
+
+  ngOnInit() {
+
+    this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+
+        if (token.isValid()) {
+          this.user = token.getPayload(); // here we receive a payload from the token and assigne it to our `user` variable 
+        //  localStorage.setItem("idUser",this.user.id.toString());
+        //  localStorage.setItem("role",this.user.role);
+          console.log("role sample layout : " ,token.getPayload()['role']) ;
+          console.log("role loc str : "+localStorage.getItem("role"))
+          localStorage.setItem("role",token.getPayload()['role']);
+          sessionStorage.setItem("role",token.getPayload()['role']);
+        }
+
+      });
+    }
 
   ngOnDestroy() {
     this.alive = false;

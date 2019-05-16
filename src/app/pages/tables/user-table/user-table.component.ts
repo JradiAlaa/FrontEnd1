@@ -58,20 +58,35 @@ export class UserTableComponent implements OnInit {
         title: 'email',
         type: 'string',
       },
+     
+      role: {
+        title: 'role',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [
+              {value: 'chef', title:'chef'},
+              {value: 'dev', title:'dev'},
+              {value: 'admin', title:'admin'},
+              {value: 'client', title:'client'},
+            ],
+          },
+        }
+    
+      },
       password: {
         title: 'password',
         type: 'string',
+        show: false,
       },
-      role: {
-        title: 'role',
-        type: 'string',
-      },
+  
 
     },
   };
   oncreateConfirm(event) {
     console.log('ddddd');
-    if (window.confirm('voulez vous ajouter ce user')) {
+    if (window.confirm('voulez vous ajouter ')) {
       event.confirm.resolve();
 
       var data = {

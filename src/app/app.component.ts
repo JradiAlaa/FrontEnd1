@@ -13,6 +13,8 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 export class AppComponent implements OnInit {
 
   constructor(private analytics: AnalyticsService) {
+  //  localStorage.clear() ;
+  console.log("in First Comp :", localStorage.getItem('role')) ;
   }
 
   ngOnInit() {

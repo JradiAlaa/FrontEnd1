@@ -1,5 +1,5 @@
-<h1 id="title" class="title">Login 11111</h1>
-<p class="sub-title">Hello! Log in with your email.</p>
+<h1 id="title" class="title">Se connecter</h1>
+<p class="sub-title">Bien venu sur TakenTechs project managment.</p>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oh snap!</b></p>
@@ -18,7 +18,7 @@
 <form (ngSubmit)="login()" #form="ngForm" aria-labelledby="title">
 
   <div class="form-control-group">
-    <label class="label" for="input-email">Email address:</label>
+    <label class="label" for="input-email"> address Email :</label>
     <input nbInput
            fullWidth
            [(ngModel)]="user.email"
@@ -26,7 +26,7 @@
            name="email"
            id="input-email"
            pattern=".+@.+\..+"
-           placeholder="Email address"
+           placeholder="address Email"
            autofocus
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
@@ -42,7 +42,7 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-password">Password:</label>
+    <label class="label" for="input-password">Mot de passe:</label>
     <input nbInput
            fullWidth
            [(ngModel)]="user.password"
@@ -50,7 +50,7 @@
            name="password"
            type="password"
            id="input-password"
-           placeholder="Password"
+           placeholder="Mot de passe"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
@@ -71,7 +71,7 @@
 
   <div class="form-control-group accept-group">
     <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
-    <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
+    <a class="forgot-password" routerLink="../request-password">mot de passe oublier !</a>
   </div>
 
   <button nbButton
@@ -83,7 +83,7 @@
   </button>
 </form>
 
-<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+<!-- <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
   or enter with:
   <div class="socials">
     <ng-container *ngFor="let socialLink of socialLinks">
@@ -99,8 +99,8 @@
          [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
     </ng-container>
   </div>
-</section>
+</section> -->
 
 <section class="another-action" aria-label="Register">
-  Don't have an account? <a class="text-link" routerLink="../register">Register</a>
+  Je n'ai pas de compte? <a class="text-link" routerLink="../register">Register</a>
 </section>

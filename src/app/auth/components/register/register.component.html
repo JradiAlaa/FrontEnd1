@@ -1,4 +1,4 @@
-<h1 id="title" class="title">Register</h1>
+<h1 id="title" class="title">Créer votre compte </h1>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oh snap!</b></p>
@@ -19,14 +19,14 @@
  
 
   <div class="form-control-group">
-    <label class="label" for="input-email">Email address:</label>
+    <label class="label" for="input-email">address Email :</label>
     <input nbInput
            [(ngModel)]="user.email"
            #email="ngModel"
            id="input-email"
            name="email"
            pattern=".+@.+..+"
-           placeholder="Email address"
+           placeholder="address Email"
            fullWidth
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
@@ -43,14 +43,14 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-password">Password:</label>
+    <label class="label" for="input-password">Mot de passe:</label>
     <input nbInput
            [(ngModel)]="user.password"
            #password="ngModel"
            type="password"
            id="input-password"
            name="password"
-           placeholder="Password"
+           placeholder="Mot de passe"
            fullWidth
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
@@ -79,14 +79,14 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-re-password">Repeat password:</label>
+    <label class="label" for="input-re-password">Confirme Mot de passe:</label>
     <input nbInput
            [(ngModel)]="user.confirmPassword"
            #rePass="ngModel"
            type="password"
            id="input-re-password"
            name="rePass"
-           placeholder="Confirm Password"
+           placeholder="Confirme Mot de passe"
            fullWidth
            [status]="email.dirty ? (email.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
@@ -103,7 +103,7 @@
 
   <div class="form-control-group accept-group" *ngIf="getConfigValue('forms.register.terms')">
     <nb-checkbox name="terms" [(ngModel)]="user.terms" [required]="getConfigValue('forms.register.terms')">
-      Agree to <a href="#" target="_blank"><strong>Terms & Conditions</strong></a>
+      Accepter <a href="#" target="_blank"><strong>Terms & Conditions</strong></a>
     </nb-checkbox>
   </div>
 
@@ -116,7 +116,7 @@
   </button>
 </form>
 
-<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+<!-- <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
   or enter with:
   <div class="socials">
     <ng-container *ngFor="let socialLink of socialLinks">
@@ -132,8 +132,8 @@
          [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
     </ng-container>
   </div>
-</section>
+</section> -->
 
 <section class="another-action" aria-label="Sign in">
-  Already have an account? <a class="text-link" routerLink="../login">Log in</a>
+ Avez vous un compte ? <a class="text-link" routerLink="../login">Log in</a>
 </section>

@@ -14,6 +14,9 @@ import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
 import { DetailPtrojetModule } from './detail-ptrojet/detail-ptrojet.module';
 import { MessagerieComponent } from './messagerie/messagerie.component';
 import { MessagerieModulModule } from './messagerie/messagerie-modul.module';
+import { ChartsComponent } from './charts/charts.component';
+import { NgGanttEditorModule } from 'ng-gantt' 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -27,9 +30,10 @@ const PAGES_COMPONENTS = [
     ProfilModule,
     MiscellaneousModule,
     DetailPtrojetModule,
-    MessagerieModulModule
-  
-
+    MessagerieModulModule,
+    NgGanttEditorModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
@@ -38,6 +42,7 @@ const PAGES_COMPONENTS = [
     CalendarComponent,
    // DetailPtrojetComponent,
     AjoutProjetComponent,
+   ChartsComponent,
    //MessagerieComponent,
 
    

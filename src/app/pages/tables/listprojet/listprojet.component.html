@@ -58,10 +58,11 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
                 <th scope="col">Etat</th>
-                <th scope="col">Date Fin</th>
+                <th scope="col">Chef Projet</th>
+                <th scope="col"></th>
+             
                 <!-- <th scope="col">Chaier des charges</th>
                 <th scope="col">Chaier des charges</th> -->
-                <th scope="col">Etat</th>
 
               </tr>
             </thead>
@@ -78,6 +79,13 @@
               <td > 
                   <button class="btn btn-hero-danger btn-demo" > refuser </button>
               </td> -->
+                  
+            <td>    <p  *ngIf="p.chefProjet == '' ">  pas encore
+           </p>
+           <p  *ngIf="p.chefProjet != '' ">  
+               {{p.chefProjet }}
+          </p>
+         </td>
               <td > 
                   <button class="btn btn-demo btn-success btn-hero"  (click)="getProjet(p.id)"> voir </button>
                 </td>
